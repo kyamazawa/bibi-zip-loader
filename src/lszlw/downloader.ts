@@ -19,7 +19,7 @@ export async function downloadRange(url: string, range: string, signal?: AbortSi
   const res = await abortableFetch(url, {
     headers: { 'Range': range },
     mode: 'cors',
-    credentials: 'omit',
+    credentials: 'same-origin',
     signal: controller.signal,
   });
   if (res.status !== 206) {
@@ -45,7 +45,7 @@ export async function downloadAll(url: string, signal?: AbortSignal): Promise<Ar
   throwIfAbort(signal);
   const res = await abortableFetch(url, {
     mode: 'cors',
-    credentials: 'omit',
+    credentials: 'same-origin',
     signal,
   });
   if (!res.ok) {
